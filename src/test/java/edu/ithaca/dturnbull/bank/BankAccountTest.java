@@ -15,11 +15,23 @@ class BankAccountTest {
 
     @Test
     void withdrawTest() throws InsufficientFundsException{
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        //Starter Tests
+        BankAccount bankAccount = new BankAccount("a@b.com", 200); 
         bankAccount.withdraw(100);
-
         assertEquals(100, bankAccount.getBalance(), 0.001);
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
+
+        BankAccount bankAccount01 = new BankAccount("a@b.com", 500);
+        assertThrows(InsufficientFundsException.class, () -> bankAccount01.withdraw(600));
+
+        BankAccount bankAccount02 = new BankAccount("a@b.com", 600); 
+        bankAccount02.withdraw(300);
+        assertEquals(300, bankAccount02.getBalance(), 0.001);
+        bankAccount02.withdraw(300);
+        assertEquals(0, bankAccount02.getBalance(), 0.001);
+
+
+
     }
 
     @Test
@@ -30,8 +42,12 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("@")); //should be False 
         assertFalse( BankAccount.isEmailValid(""));         // empty string
         assertFalse( BankAccount.isEmailValid(".abc@mail.com")); 
+    }
 
-        
+    @Test
+    void getBalanceValidTest(){
+
+
     }
 
     @Test
