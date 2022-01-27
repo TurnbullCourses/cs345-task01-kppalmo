@@ -49,7 +49,9 @@ public class BankAccount {
         if (email.length() <= 3){
             return false;
         }
-
+        if (email.indexOf('.') == 0){
+            return false;
+        }
         else {
             return true;
         }
