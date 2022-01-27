@@ -30,6 +30,9 @@ class BankAccountTest {
         bankAccount02.withdraw(300);
         assertEquals(0, bankAccount02.getBalance(), 0.001);
 
+        BankAccount bankAccount03 = new BankAccount("e@b.com", 400);
+        bankAccount03.withdraw(200.5);
+        assertEquals(199.5, bankAccount03.getBalance(), 0.001);
 
 
     }
