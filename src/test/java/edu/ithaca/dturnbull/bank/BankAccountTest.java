@@ -34,6 +34,11 @@ class BankAccountTest {
         bankAccount03.withdraw(200.5);
         assertEquals(199.5, bankAccount03.getBalance(), 0.001);
 
+        //This test OG Fails - Exception needs to be fixed to include negative nums
+        BankAccount bankAccount04 = new BankAccount("e@b.com", 300);
+        assertThrows(InsufficientFundsException.class, () -> bankAccount04.withdraw(-100));
+
+
 
     }
 
