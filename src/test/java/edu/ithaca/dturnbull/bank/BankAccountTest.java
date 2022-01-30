@@ -41,19 +41,19 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest() {
-        assertTrue(BankAccount.isEmailValid("a@b.com"));
-        assertTrue(BankAccount.isEmailValid("email@example.com"));
-        assertTrue(BankAccount.isEmailValid("firstname.lastname@example.com"));
-        assertTrue(BankAccount.isEmailValid("email@example.museum"));
-        assertTrue(BankAccount.isEmailValid("firstname-lastname@example.com"));
+        assertTrue(BankAccount.isEmailValid("a@b.com")); //should be True
+        assertTrue(BankAccount.isEmailValid("email@example.com")); //should be True
+        assertTrue(BankAccount.isEmailValid("firstname.lastname@example.com")); //should be True
+        assertTrue(BankAccount.isEmailValid("email@example.museum")); //should be True
+        assertTrue(BankAccount.isEmailValid("firstname-lastname@example.com")); //should be True
 
-        assertFalse(BankAccount.isEmailValid("a@")); // should be False
-        assertFalse(BankAccount.isEmailValid("a@d")); // should be False
-        assertFalse(BankAccount.isEmailValid("@")); // should be False
-        assertFalse(BankAccount.isEmailValid(".email@example.com")); // should be False
-        assertFalse(BankAccount.isEmailValid("email..email@example.com")); // should be False
-        assertFalse(BankAccount.isEmailValid("email@example.com (Joe Smith)")); // should be False
-        assertFalse(BankAccount.isEmailValid("email@example")); // should be False
+        assertFalse(BankAccount.isEmailValid("a@")); // should be False - no .com domain name
+        assertFalse(BankAccount.isEmailValid("a@d")); // should be False - no .com domain name
+        assertFalse(BankAccount.isEmailValid("@")); // should be False - only @ symbol, no prefix or suffix
+        assertFalse(BankAccount.isEmailValid(".email@example.com")); // should be False - cant start with a period
+        assertFalse(BankAccount.isEmailValid("email..email@example.com")); // should be False - cant have .. 
+        assertFalse(BankAccount.isEmailValid("email@example.com (Joe Smith)")); // should be False - cant have outside text besides email adress
+        assertFalse(BankAccount.isEmailValid("email@example")); // should be False - no .com 
         assertFalse(BankAccount.isEmailValid("")); // empty string
     }
 
