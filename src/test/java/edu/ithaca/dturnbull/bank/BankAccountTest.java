@@ -97,4 +97,44 @@ class BankAccountTest {
         assertFalse(BankAccount.isAmountValid(-.42));
     }
 
+    @Test
+    void depositTest() throws InsufficientFundsException {
+        BankAccount bankAccount = new BankAccount("a@b.com", 500);
+        bankAccount.Deposit(100);
+        assertEquals(600, bankAccount.getBalance(), 0.001);
+        bankAccount.Deposit(600);
+        assertEquals(1200, bankAccount.getBalance(), 0.001);
+        bankAccount.Deposit(50.4);
+        assertEquals(1250.4, bankAccount.getBalance(), 0.001);
+        bankAccount.withdraw(.4);
+        assertEquals(1250, bankAccount.getBalance(), 0.001);
+        bankAccount.Deposit(400);
+        assertEquals(1650, bankAccount.getBalance(), 0.001);
+        // Error Cases
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-10.452));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Deposit(-10.452));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Deposit(100000.00003));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Deposit(-45.566423));
+    }
+
+    @Test
+    void transferTest() throws InsufficientFundsException {
+        BankAccount bankAccount = new BankAccount("a@b.com", 500);
+        BankAccount bankAccount02 = new BankAccount("b@a.net", 1000);
+        assertEquals(500, bankAccount.getBalance(), 0.001);
+        assertEquals(1000, bankAccount02.getBalance(), 0.001);
+        bankAccount.Transfer(bankAccount02, 300);
+        assertEquals(200, bankAccount.getBalance(), 0.001);
+        assertEquals(1300, bankAccount02.getBalance(), 0.001);
+        bankAccount02.Transfer(bankAccount, 400);
+        assertEquals(600, bankAccount.getBalance(), 0.001);
+        assertEquals(900, bankAccount02.getBalance(), 0.001);
+        // Error cases
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Transfer(bankAccount02, -45.566423));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Transfer(bankAccount02, -45.566423));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Transfer(bankAccount02, 40.523445));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Transfer(bankAccount02, -10));
+
+    }
+
 }
