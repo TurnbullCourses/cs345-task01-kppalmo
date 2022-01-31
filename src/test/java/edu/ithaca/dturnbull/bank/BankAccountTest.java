@@ -52,7 +52,6 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid(".email@example.com")); // should be False - cant start with a period
         assertFalse(BankAccount.isEmailValid("email..email@example.com")); // should be False - cant have ..
         assertFalse(BankAccount.isEmailValid("email@example.com (Joe Smith)")); // should be False - outside text
-        assertFalse(BankAccount.isEmailValid("email@example")); // should be False - no .com
         assertFalse(BankAccount.isEmailValid("")); // empty string
     }
 
