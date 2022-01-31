@@ -30,11 +30,16 @@ public class BankAccount {
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        if (amount <= balance){
-            balance -= amount;
+        if( isAmountValid(amount)){
+            if (amount <= balance){
+                balance -= amount;
+            }
+            else {
+                throw new InsufficientFundsException("Not enough money");
+            }
         }
         else {
-            throw new InsufficientFundsException("Not enough money");
+            throw new InsufficientFundsException("Amount Not Valid");
         }
     }
 
@@ -58,5 +63,26 @@ public class BankAccount {
         else {
             return true;
         }
+    }
+
+    public static boolean isAmountValid(double amount){
+        //method takes in a double and checks amount of decimal points
+        if(amount < 0){
+            return false;
+        }
+        if ((amount * 100) % 1 != 0) {
+            return false;            
+        }
+        else{
+            return true;
+        }
+    }
+
+    public static void Deposit(double amount){
+
+    }
+
+    public static void Transfer(String bank01 , String bank02){
+
     }
 }
